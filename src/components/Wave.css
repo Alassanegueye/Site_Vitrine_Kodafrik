@@ -1,0 +1,21 @@
+.wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 2;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.wave svg {
+  display: block;
+  width: 100%;
+  height: clamp(48px, 6vw, 96px);
+}
+
+/* Les sections qui portent un relief réservent la place en bas pour que
+   le contenu ne passe jamais sous le tracé. */
+.section.has-wave {
+  padding-bottom: clamp(7rem, 12vw, 10.5rem);
+}

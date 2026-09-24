@@ -1,0 +1,61 @@
+.cta-band {
+  padding-block: clamp(1rem, 3vw, 2rem);
+}
+
+.cta-band__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  padding: clamp(2rem, 4.5vw, 3.25rem);
+  border-radius: var(--r-xl);
+  background: linear-gradient(120deg, var(--navy-900) 0%, var(--blue-700) 60%, var(--blue-500) 130%);
+  color: #dbe5fa;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Halo décoratif */
+.cta-band__inner::after {
+  content: '';
+  position: absolute;
+  right: -90px;
+  top: -120px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 66%);
+  pointer-events: none;
+}
+
+.cta-band__inner h2 {
+  color: #fff;
+  font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+}
+
+.cta-band__inner p {
+  margin-top: 0.9rem;
+  max-width: 36rem;
+  font-size: 1rem;
+  color: #c3d4f5;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .cta-band__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .cta-band__actions .btn {
+    width: 100%;
+  }
+}

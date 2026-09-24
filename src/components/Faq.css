@@ -1,0 +1,137 @@
+.faq__inner {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.faq__intro {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+}
+
+.faq__intro p {
+  margin-top: 1.1rem;
+  color: var(--muted);
+}
+
+.faq__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--r-full);
+  background: var(--white);
+  border: 1px solid var(--border);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--blue-600);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.faq__mail:hover {
+  border-color: var(--blue-400);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq__list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.faq__item {
+  border-radius: var(--r-md);
+  background: var(--white);
+  border: 1px solid var(--border);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.faq__item.is-open {
+  border-color: var(--blue-300);
+  box-shadow: var(--shadow-md);
+}
+
+.faq__item h3 {
+  font-size: inherit;
+  margin: 0;
+}
+
+.faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+  padding: 1.15rem 1.35rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.faq__question:hover {
+  color: var(--blue-600);
+}
+
+.faq__toggle {
+  flex-shrink: 0;
+  padding: 4px;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-600);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq__item.is-open .faq__toggle {
+  transform: rotate(135deg);
+  background: var(--blue-500);
+  color: #fff;
+}
+
+/* Ouverture animée sans hauteur fixe : 0fr -> 1fr */
+.faq__answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.35s;
+}
+
+.faq__item.is-open .faq__answer {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+.faq__answer > p {
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 1.35rem;
+  font-size: 0.94rem;
+  color: var(--muted);
+  transition: padding 0.35s ease;
+}
+
+.faq__item.is-open .faq__answer > p {
+  padding-bottom: 1.35rem;
+}
+
+@media (max-width: 900px) {
+  .faq__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .faq__intro {
+    position: static;
+  }
+}

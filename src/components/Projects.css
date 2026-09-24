@@ -1,0 +1,190 @@
+.projects {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.projects__glow {
+  position: absolute;
+  z-index: -1;
+  top: -140px;
+  left: 50%;
+  width: 720px;
+  height: 620px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(27, 110, 243, 0.35), transparent 68%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.projects__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: none;
+}
+
+.projects__head > div {
+  max-width: 42rem;
+}
+
+.projects__head-cta {
+  flex-shrink: 0;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+/* ---------- Carte projet ---------- */
+
+.pcard {
+  display: flex;
+  flex-direction: column;
+}
+
+.pcard__media {
+  position: relative;
+  display: block;
+  margin-bottom: 1.4rem;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  overflow: hidden;
+  box-shadow: 0 26px 50px -28px rgba(0, 0, 0, 0.75);
+}
+
+.pcard__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Badge plateforme : rappelle qu'il s'agit d'applications mobiles. */
+.pcard__platform {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--r-full);
+  background: rgba(11, 21, 51, 0.88);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(4px);
+}
+
+.pcard__platform svg {
+  color: var(--blue-300);
+}
+
+/* Voile + bouton révélés au survol, sans déplacer l'image. */
+.pcard__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 21, 51, 0.35),
+    rgba(11, 21, 51, 0.82)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.pcard__overlay-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--r-full);
+  background: var(--white);
+  color: var(--navy-900);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pcard:hover .pcard__overlay,
+.pcard:focus-visible .pcard__overlay {
+  opacity: 1;
+}
+
+.pcard:hover .pcard__overlay-btn,
+.pcard:focus-visible .pcard__overlay-btn {
+  transform: none;
+}
+
+.pcard__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  color: #8fa8d6;
+}
+
+.pcard h3 {
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  transition: color 0.25s ease;
+}
+
+.pcard:hover h3 {
+  color: var(--blue-300);
+}
+
+.pcard p {
+  margin-top: 0.55rem;
+  font-size: 0.92rem;
+  color: #a9bce0;
+}
+
+/* Relais tactile du voile de survol, affiché uniquement en petit écran. */
+.pcard__cta {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blue-300);
+}
+
+@media (max-width: 980px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 660px) {
+  .projects__grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  /* Pas de survol au doigt : le voile laisse place à un lien visible. */
+  .pcard__overlay {
+    display: none;
+  }
+
+  .pcard__cta {
+    display: inline-flex;
+  }
+}

@@ -1,0 +1,68 @@
+.floating-contact {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0.9rem;
+  border-radius: var(--r-full);
+  background: #25d366;
+  color: #04340f;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 0 16px 32px -14px rgba(4, 52, 15, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px) scale(0.92);
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    gap 0.3s ease,
+    padding 0.3s ease;
+}
+
+.floating-contact.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Le libellé se déplie au survol pour rester discret au repos. */
+.floating-contact span {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.floating-contact:hover,
+.floating-contact:focus-visible {
+  gap: 0.6rem;
+  padding-right: 1.3rem;
+}
+
+.floating-contact:hover span,
+.floating-contact:focus-visible span {
+  max-width: 220px;
+}
+
+@media (max-width: 560px) {
+  .floating-contact {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .floating-contact:hover span,
+  .floating-contact:focus-visible span {
+    max-width: 0;
+  }
+
+  .floating-contact:hover,
+  .floating-contact:focus-visible {
+    padding-right: 0.9rem;
+    gap: 0;
+  }
+}

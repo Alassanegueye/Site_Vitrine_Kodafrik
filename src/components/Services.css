@@ -1,0 +1,158 @@
+/* Grille en filets plutôt qu'en cartes flottantes : les cellules partagent
+   des lignes de 1px obtenues par le `gap` sur un fond coloré. */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.service {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  padding: 2.1rem 1.9rem 1.9rem;
+  background: var(--surface);
+  transition: background-color 0.4s ease;
+}
+
+.service:hover {
+  background: var(--blue-50);
+}
+
+/* Halo positionné sur le pointeur (variables --px / --py écrites en JS). */
+.service::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    260px circle at var(--px, 50%) var(--py, 0%),
+    rgba(27, 110, 243, 0.1),
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.service:hover::before {
+  opacity: 1;
+}
+
+/* Filet d'accent qui se déploie depuis la gauche */
+.service::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--blue-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service:hover::after {
+  transform: scaleX(1);
+}
+
+.service__icon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1.25rem;
+  border-radius: var(--r-md);
+  background: var(--white);
+  border: 1px solid var(--border-strong);
+  color: var(--blue-600);
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service:hover .service__icon {
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.service h3 {
+  letter-spacing: -0.02em;
+}
+
+.service p {
+  margin-top: 0.7rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.service__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  margin: 1.3rem 0 1.6rem;
+}
+
+.service__items li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+
+.service__items li::after {
+  content: '';
+  width: 3px;
+  height: 3px;
+  margin-left: 0.15rem;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.service__items li:last-child::after {
+  display: none;
+}
+
+.service__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--blue-600);
+}
+
+.service__link svg {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service:hover .service__link svg {
+  transform: translateX(5px);
+}
+
+@media (max-width: 980px) {
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service {
+    padding: 1.75rem 1.5rem;
+  }
+}
